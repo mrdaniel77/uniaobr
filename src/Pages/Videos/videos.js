@@ -5,7 +5,10 @@ import estilo from './estilo'
 
 const Videos = ({navigation}) => {
     return(
-        <View style={estilo.container}>
+        <ImageBackground 
+            style={estilo.container}
+            source={require('../../../assets/img/grama.jfif')}>
+
             <View style={estilo.headerTexto}>
                 <Text style={estilo.texto}>
                     Flamengo vs Portuguesa - Campeonato carioca
@@ -47,7 +50,7 @@ const Videos = ({navigation}) => {
                 
             
                   
-        </View>
+        </ImageBackground>
 
 
     )

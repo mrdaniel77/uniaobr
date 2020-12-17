@@ -1,37 +1,48 @@
-import React from 'react';
-import {View, Text, Image, TextInput, TouchableOpacity, ImageBackground, ScrollView, ViewPropTypes, RecyclerViewBackedScrollViewBase} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {View, Text, Image, TouchableOpacity, ScrollView, FlatList, ImageBackground} from 'react-native';
 import estilo from './estilo'
+import getCompeticoes from '../../api/competicoes'
 
 const Feed = () => {
+    const [times, setTimes] = useState('');
+
+    useEffect(() => {
+        getCompeticoes(setTimes)
+    }, [])
+
     return (
 
-        <View style={estilo.container}>            
-            <View>
+        <ImageBackground 
+            source={require('../../../assets/img/campo.jpg')}
+            style={estilo.container}>            
+    
+            <View style={estilo.header}>
                 <Image 
                     style={estilo.headerImg}
                     source={require('../../../assets/img/user.png')}
                 />
+                <Text style={estilo.input}>pesquisa</Text>
             </View>
             
-            <ScrollView >
-                <Image 
-                source={require('../../../assets/img/mengo.png')} 
-                style={estilo.img} />
-                <Image 
-                source={require('../../../assets/img/gremio.png')} 
-                style={estilo.img} />
-                <Image 
-                source={require('../../../assets/img/palmeiras.png')} 
-                style={estilo.img} />
-                <Image 
-                source={require('../../../assets/img/paranaense.png')} 
-                style={estilo.img} />
-                <Image 
-                source={require('../../../assets/img/brasiliense.png')} 
-                style={estilo.img} />
+            <ScrollView style={estilo.scroll}>
+                <FlatList 
+                    data={times}
+                    keyExtractor={(item, index) => index.toString() }
+                    renderItem={({item}) => (
+                        <View style={estilo.card}>
+                            <Image 
+                                source={{uri: item.crestUrl}} 
+                                style={estilo.img} 
+                            />
+                                <Text style={estilo.nome}>{item.name}   
+                                </Text>
+                        </View>
+                    )}
+                />
+                
             </ScrollView>
 
-        </View>             
+        </ImageBackground>            
 
 
 

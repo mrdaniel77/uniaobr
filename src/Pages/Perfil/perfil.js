@@ -5,9 +5,11 @@ import estilo from './estilo'
 
 const Perfil = ({navigation}) => {
     return(
-        <Text>
-            testando o Perfil
-        </Text>
+        <ImageBackground 
+            style={estilo.container}
+            source={require('../../../assets/img/grama.jfif')}>
+        
+        </ImageBackground>
 
 
     )
